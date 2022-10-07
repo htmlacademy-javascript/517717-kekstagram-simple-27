@@ -1,5 +1,5 @@
 const getRandomPositiveNumber = function (a, b) {
-  if (a < 0 || b < 0) {
+  if (a < 0 || b < 0 || isNaN(a) || isNaN(b)) {
     return NaN;
   }
   const min = Math.ceil(Math.min(a, b));
@@ -9,9 +9,7 @@ const getRandomPositiveNumber = function (a, b) {
   return Math.floor(randomNumber);
 };
 
-const checkStringLength = function (string, length) {
-  return string.length <= length;
-};
+const checkStringLength = (string, length) => string.length <= length;
 
 getRandomPositiveNumber(8, 4);
 checkStringLength('', 50);
