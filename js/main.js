@@ -1,5 +1,5 @@
 import {createOffersMock} from './data.js';
 
-const offers = createOffersMock();
+createOffersMock();
 
-console.log(offers);
+
