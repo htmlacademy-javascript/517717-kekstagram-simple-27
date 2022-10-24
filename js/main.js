@@ -1,5 +1,3 @@
-import {createOffersMock} from './data.js';
+import {renderPicture} from './render.js';
 
-createOffersMock();
-
-
+renderPicture();
