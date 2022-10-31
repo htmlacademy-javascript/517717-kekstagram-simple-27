@@ -1,6 +1,6 @@
 import {getRandomPositiveNumber} from './util.js';
 
-const createOffersMock = () => {
+const createData = () => {
   const NUMBER_OFFERS = 25;
   const DESCRIPTIONS = [
     'Описание 1',
@@ -56,4 +56,4 @@ const createOffersMock = () => {
   return offersMock;
 };
 
-export {createOffersMock};
+export {createData};
