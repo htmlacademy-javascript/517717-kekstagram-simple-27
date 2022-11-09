@@ -48,7 +48,6 @@ const applyEffect = (evt) => {
         min: params[effect][0],
         max: params[effect][1],
       },
-      connect: true,
       start: params[effect][2],
       step: params[effect][3],
       filter: params[effect][4],
