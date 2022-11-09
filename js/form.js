@@ -11,7 +11,7 @@ const increaseButton = form.querySelector('.scale__control--bigger');
 const scaleControl = form.querySelector('.scale__control--value');
 let currentValue = Number.parseInt(scaleControl.value, 10);
 
-const scaleParams = {
+const ScaleParams = {
   MIN: 25,
   MAX: 100,
   STEP: 25,
@@ -21,8 +21,8 @@ const resetEffect = () => {
   img.className = '';
   img.style.transform = '';
   img.style.filter = '';
-  scaleControl.value = `${scaleParams.MAX}%`;
-  currentValue = `${scaleParams.MAX}`;
+  scaleControl.value = `${ScaleParams.MAX}%`;
+  currentValue = `${ScaleParams.MAX}`;
 };
 
 const resetData = () => {
