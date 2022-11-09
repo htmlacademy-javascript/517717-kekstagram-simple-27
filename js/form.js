@@ -66,14 +66,14 @@ function onModalEscPress(evt) {
 }
 
 const decreaseImage = () => {
-  if (currentValue === scaleParams.MIN) {
+  if (currentValue === ScaleParams.MIN) {
     return false;
   }
 
   if (!isNaN(currentValue)) {
     currentValue = Math.max(
-      currentValue - scaleParams.STEP,
-      scaleParams.MIN
+      currentValue - ScaleParams.STEP,
+      ScaleParams.MIN
     );
   }
   scaleControl.value = `${currentValue}%`;
@@ -81,14 +81,14 @@ const decreaseImage = () => {
 };
 
 const increaseImage = () => {
-  if (currentValue === scaleParams.MAX) {
+  if (currentValue === ScaleParams.MAX) {
     return false;
   }
 
   if (!isNaN(currentValue)) {
     currentValue = Math.min(
-      currentValue + scaleParams.STEP,
-      scaleParams.MAX
+      currentValue + ScaleParams.STEP,
+      ScaleParams.MAX
     );
   }
 
