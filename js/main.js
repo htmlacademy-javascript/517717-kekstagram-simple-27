@@ -1,8 +1,7 @@
 import {renderPictures} from './render-pictures.js';
-import {openModal} from './user-modal.js';
-import { validation } from './validation.js';
-
+import './form.js';
+import './apply-effect.js';
+import { validate } from './validate.js';
 
 renderPictures();
-openModal();
-validation();
+validate();
