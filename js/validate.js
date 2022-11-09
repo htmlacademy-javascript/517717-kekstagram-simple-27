@@ -14,7 +14,6 @@ const validate = () => {
 
   const showError = () => {
     document.body.append(error);
-    error.classList.add('active');
 
     error.querySelector('.error__button').addEventListener('click', hideError);
     document.addEventListener('keydown', onPopupEscPress);
@@ -32,21 +31,17 @@ const validate = () => {
 
   const showSuccess = () => {
     document.body.append(success);
+
     success.querySelector('.success__button').addEventListener('click', hideSuccess);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
-    success.classList.add('active');
   };
 
   function onPopupEscPress(evt) {
     if (isEscapeKey(evt.key)) {
       evt.preventDefault();
-      if (error.classList.contains('active')) {
-        hideError();
-      }
-      if (success.classList.contains('active')) {
-        hideSuccess();
-      }
+      hideError();
+      hideSuccess();
     }
   }
 
