@@ -27,8 +27,7 @@ const validate = () => {
 
     success.querySelector('.success__button').removeEventListener('click', hideSuccess);
     document.removeEventListener('keydown', onPopupEscPress);
-    document.removeEventListener('click', onPopupOutClick);
-    document.removeEventListener('click', onPopupOutClick);
+    document.removeEventListener('click', onPopupOutClick);пше
   };
 
   const showSuccess = () => {
