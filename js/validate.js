@@ -1,5 +1,5 @@
-import { form, resetData } from './form.js';
 import { isEscapeKey } from './util.js';
+import { form, resetData } from './form.js';
 
 const validate = () => {
   const error = document.querySelector('#error').content.querySelector('.error');
