@@ -28,4 +28,6 @@ const getRandomPositiveNumber = function (min, max) {
 
 const checkStringLength = (string, length) => string.length <= length;
 
-export {getRandomPositiveNumber, checkStringLength};
+const isEscapeKey = (key) => key === 'Escape';
+
+export {getRandomPositiveNumber, checkStringLength, isEscapeKey};
