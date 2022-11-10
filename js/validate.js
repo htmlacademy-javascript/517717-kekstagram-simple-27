@@ -40,8 +40,12 @@ const validate = () => {
   function onPopupEscPress(evt) {
     if (isEscapeKey(evt.key)) {
       evt.preventDefault();
-      hideError();
-      hideSuccess();
+      if (typeof error === 'object' && error !== null) {
+        hideError();
+      }
+      if (typeof success === 'object' && success !== null) {
+        hideSuccess();
+      }
     }
   }
 

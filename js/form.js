@@ -22,7 +22,7 @@ const resetEffect = () => {
   img.style.transform = '';
   img.style.filter = '';
   scaleControl.value = `${ScaleParams.MAX}%`;
-  currentValue = `${ScaleParams.MAX}`;
+  currentValue = ScaleParams.MAX;
 };
 
 const resetData = () => {
@@ -65,38 +65,29 @@ function onModalEscPress(evt) {
   }
 }
 
-const decreaseImage = () => {
-  if (currentValue === ScaleParams.MIN) {
-    return false;
-  }
-
+const decreaseScale = () => {
   if (!isNaN(currentValue)) {
     currentValue = Math.max(
       currentValue - ScaleParams.STEP,
       ScaleParams.MIN
     );
+    scaleControl.value = `${currentValue}%`;
+    img.style.transform = `scale(${currentValue / 100})`;
   }
-  scaleControl.value = `${currentValue}%`;
-  img.style.transform = `scale(${currentValue / 100})`;
 };
 
-const increaseImage = () => {
-  if (currentValue === ScaleParams.MAX) {
-    return false;
-  }
-
+const increaseScale = () => {
   if (!isNaN(currentValue)) {
     currentValue = Math.min(
       currentValue + ScaleParams.STEP,
       ScaleParams.MAX
     );
+    scaleControl.value = `${currentValue}%`;
+    img.style.transform = `scale(${currentValue / 100})`;
   }
-
-  scaleControl.value = `${currentValue}%`;
-  img.style.transform = `scale(${currentValue / 100})`;
 };
 
-decreaseButton.addEventListener('click', decreaseImage);
-increaseButton.addEventListener('click', increaseImage);
+decreaseButton.addEventListener('click', decreaseScale);
+increaseButton.addEventListener('click', increaseScale);
 
 export { resetData, resetEffect, form, img, sliderBlock };

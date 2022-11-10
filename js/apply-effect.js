@@ -12,30 +12,29 @@ const params = {
   heat: [1, 3, 0, 0.1, 'brightness', ''],
 };
 let effect = params.none[4];
+let [min, max, start, step, filter, unit] = params[effect];
 
 noUiSlider.create(slider, {
   connect: 'lower',
   range: {
-    min: 0,
-    max: 0
+    min: min,
+    max: max,
   },
-  start: 0,
-  step: 0,
-  filter: effect,
-  unit: '',
+  start: start,
+  step: step,
 });
 
 slider.noUiSlider.on('update', () => {
-  sliderValue.setAttribute('value', slider.noUiSlider.get());
-  img.style.filter = `${params[effect][4]}(${slider.noUiSlider.get()}${params[effect][5]})`;
+  sliderValue.value = slider.noUiSlider.get();
+  img.style.filter = `${filter}(${slider.noUiSlider.get()}${unit})`;
 });
 
 const applyEffect = (evt) => {
   if (evt.target.classList.contains('effects__radio')) {
     effect = evt.target.value;
+    [min, max, start, step, filter, unit] = params[effect];
+
     resetEffect();
-    const radio = document.querySelector(`#effect-${effect}`);
-    radio.checked = true;
     img.classList.add(`effects__preview--${effect}`);
     if (effect === 'none') {
       sliderBlock.classList.add('hidden');
@@ -45,13 +44,11 @@ const applyEffect = (evt) => {
 
     slider.noUiSlider.updateOptions({
       range: {
-        min: params[effect][0],
-        max: params[effect][1],
+        min: min,
+        max: max,
       },
-      start: params[effect][2],
-      step: params[effect][3],
-      filter: params[effect][4],
-      unit: params[effect][5],
+      start: start,
+      step: step,
     });
   }
 };
