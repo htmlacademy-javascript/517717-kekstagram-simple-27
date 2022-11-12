@@ -5,11 +5,11 @@ const sliderValue = sliderBlock.querySelector('.effect-level__value');
 const params = {
   //min, max, start, step, filter, unit
   none: [0, 0, 0, 0, 'none', 0],
-  chrome: [0, 1, 0, 0.1, 'grayscale', ''],
-  sepia: [0, 1, 0, 0.1, 'sepia', ''],
-  marvin: [0, 100, 0, 1, 'invert', '%'],
-  phobos: [0, 3, 0, 0.1, 'blur', 'px'],
-  heat: [1, 3, 0, 0.1, 'brightness', ''],
+  chrome: [0, 1, 1, 0.1, 'grayscale', ''],
+  sepia: [0, 1, 1, 0.1, 'sepia', ''],
+  marvin: [0, 100, 100, 1, 'invert', '%'],
+  phobos: [0, 3, 3, 0.1, 'blur', 'px'],
+  heat: [1, 3, 3, 0.1, 'brightness', ''],
 };
 let effect = params.none[4];
 let [min, max, start, step, filter, unit] = params[effect];
@@ -52,4 +52,5 @@ const applyEffect = (evt) => {
     });
   }
 };
+
 document.querySelector('.effects__list').addEventListener('click', applyEffect);

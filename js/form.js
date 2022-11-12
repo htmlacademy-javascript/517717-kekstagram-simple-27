@@ -50,7 +50,7 @@ const openModal = () => {
   document.addEventListener('click', onModalOutClick);
 };
 
-upload.addEventListener('click', openModal);
+upload.addEventListener('change', openModal);
 
 function onModalOutClick(evt) {
   if (evt.target === overlay) {
@@ -73,6 +73,8 @@ const decreaseScale = () => {
     );
     scaleControl.value = `${currentValue}%`;
     img.style.transform = `scale(${currentValue / 100})`;
+  } else {
+    throw new Error('Значение не является числом');
   }
 };
 
@@ -84,10 +86,12 @@ const increaseScale = () => {
     );
     scaleControl.value = `${currentValue}%`;
     img.style.transform = `scale(${currentValue / 100})`;
+  } else {
+    throw new Error('Значение не является числом');
   }
 };
 
 decreaseButton.addEventListener('click', decreaseScale);
 increaseButton.addEventListener('click', increaseScale);
 
-export { resetData, resetEffect, form, img, sliderBlock };
+export { resetData, closeModal, resetEffect, form, img, sliderBlock };

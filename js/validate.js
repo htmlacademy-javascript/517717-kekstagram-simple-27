@@ -1,30 +1,37 @@
 import { isEscapeKey } from './util.js';
-import { form, resetData } from './form.js';
+import { form, closeModal } from './form.js';
+import { sendData } from './api.js';
 
 const validate = () => {
-  const error = document.querySelector('#error').content.querySelector('.error');
+  const error = document
+    .querySelector('#error')
+    .content.querySelector('.error');
   const success = document.querySelector('#success').content.querySelector('.success');
+  const submitButton = form.querySelector('#upload-submit');
+  const successButton = success.querySelector('.success__button');
+  const errorButton = error.querySelector('.error__button');
 
   const hideError = () => {
     error.remove();
 
-    error.querySelector('.error__button').removeEventListener('click', hideError);
+    errorButton.removeEventListener('click', hideError);
     document.removeEventListener('keydown', onPopupEscPress);
+    document.addEventListener('click', onPopupOutClick);
   };
 
   const showError = () => {
     document.body.append(error);
 
-    error.querySelector('.error__button').addEventListener('click', hideError);
+    errorButton.addEventListener('click', hideError);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
   };
 
   const hideSuccess = () => {
     success.remove();
-    resetData();
+    closeModal();
 
-    success.querySelector('.success__button').removeEventListener('click', hideSuccess);
+    successButton.removeEventListener('click', hideSuccess);
     document.removeEventListener('keydown', onPopupEscPress);
     document.removeEventListener('click', onPopupOutClick);
   };
@@ -32,7 +39,7 @@ const validate = () => {
   const showSuccess = () => {
     document.body.append(success);
 
-    success.querySelector('.success__button').addEventListener('click', hideSuccess);
+    successButton.addEventListener('click', hideSuccess);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
   };
@@ -58,6 +65,16 @@ const validate = () => {
     }
   }
 
+  const blockSubmitButton = () => {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Публикую...';
+  };
+
+  const unblockSubmitButton = () => {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Опубликовать';
+  };
+
   const pristine = new Pristine(form, {
     classTo: 'img-upload__text',
     errorTextParent: 'img-upload__text',
@@ -67,10 +84,18 @@ const validate = () => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      showSuccess();
-      form.submit();
-    } else {
-      showError();
+      blockSubmitButton();
+      sendData(
+        () => {
+          showSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          showError();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target)
+      );
     }
   });
 };
