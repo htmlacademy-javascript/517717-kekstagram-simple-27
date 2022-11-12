@@ -1,5 +1,4 @@
 //import {createData} from './create-data.js';
-
 //const picturesData = createData();
 
 const renderPictures = (picturesData) => {
