@@ -3,38 +3,36 @@ import { form, closeModal, onModalEscPress } from './form.js';
 import { sendData } from './api.js';
 
 const validate = () => {
-  const error = document
-    .querySelector('#error')
-    .content.querySelector('.error');
+  const error = document.querySelector('#error').content.querySelector('.error');
   const success = document.querySelector('#success').content.querySelector('.success');
   const submitButton = form.querySelector('#upload-submit');
   const successButton = success.querySelector('.success__button');
   const errorButton = error.querySelector('.error__button');
 
-  const hideError = () => {
+  const onErrorHide = () => {
     error.remove();
 
-    errorButton.removeEventListener('click', hideError);
+    errorButton.removeEventListener('click', onErrorHide);
+    document.addEventListener('keydown', onModalEscPress);
     document.removeEventListener('keydown', onPopupEscPress);
     document.removeEventListener('click', onPopupOutClick);
-    document.addEventListener('keydown', onModalEscPress);
   };
 
   const showError = () => {
     document.body.append(error);
     error.classList.add('active');
 
-    errorButton.addEventListener('click', hideError);
+    errorButton.addEventListener('click', onErrorHide);
+    document.removeEventListener('keydown', onModalEscPress);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
-    document.removeEventListener('keydown', onModalEscPress);
   };
 
-  const hideSuccess = () => {
+  const onSuccessHide = () => {
     success.remove();
     closeModal();
 
-    successButton.removeEventListener('click', hideSuccess);
+    successButton.removeEventListener('click', onSuccessHide);
     document.removeEventListener('keydown', onPopupEscPress);
     document.removeEventListener('click', onPopupOutClick);
   };
@@ -43,7 +41,7 @@ const validate = () => {
     document.body.append(success);
     success.classList.add('active');
 
-    successButton.addEventListener('click', hideSuccess);
+    successButton.addEventListener('click', onSuccessHide);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
   };
@@ -52,21 +50,21 @@ const validate = () => {
     if (isEscapeKey(evt.key)) {
       evt.preventDefault();
       if (error.classList.contains('active')) {
-        hideError();
+        onErrorHide();
       }
 
       if (success.classList.contains('active')) {
-        hideSuccess();
+        onSuccessHide();
       }
     }
   }
 
   function onPopupOutClick(evt) {
     if (evt.target === error) {
-      hideError();
+      onErrorHide();
     }
     if (evt.target === success) {
-      hideSuccess();
+      onSuccessHide();
     }
   }
 

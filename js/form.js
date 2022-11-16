@@ -3,7 +3,7 @@ import { isEscapeKey } from './util.js';
 const overlay = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
 const sliderBlock = form.querySelector('.effect-level');
-const upload = form.querySelector('#upload-file');
+const loading = form.querySelector('#upload-file');
 const close = form.querySelector('#upload-cancel');
 const img = form.querySelector('.img-upload__preview img');
 const decreaseButton = form.querySelector('.scale__control--smaller');
@@ -31,6 +31,10 @@ const resetData = () => {
   sliderBlock.classList.add('hidden');
 };
 
+const uploadImage = () => {
+  img.src = URL.createObjectURL(loading.files[0]);
+};
+
 const closeModal = () => {
   resetData();
   document.body.classList.remove('modal-open');
@@ -44,11 +48,12 @@ const openModal = () => {
   document.body.classList.add('modal-open');
   overlay.classList.remove('hidden');
 
+  uploadImage();
   document.addEventListener('keydown', onModalEscPress);
   close.addEventListener('click', closeModal);
 };
 
-upload.addEventListener('change', openModal);
+loading.addEventListener('change', openModal);
 
 function onModalEscPress(evt) {
   if (isEscapeKey(evt.key)) {
