@@ -50,7 +50,6 @@ const openModal = () => {
 
 upload.addEventListener('change', openModal);
 
-
 function onModalEscPress(evt) {
   if (isEscapeKey(evt.key)) {
     evt.preventDefault();

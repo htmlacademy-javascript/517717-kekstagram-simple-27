@@ -6,7 +6,6 @@ import { getData } from './api.js';
 
 
 validate();
-
 getData((pictures) => {
   renderPictures(pictures);
 });

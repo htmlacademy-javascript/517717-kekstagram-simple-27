@@ -16,7 +16,7 @@ const validate = () => {
 
     errorButton.removeEventListener('click', hideError);
     document.removeEventListener('keydown', onPopupEscPress);
-    document.addEventListener('click', onPopupOutClick);
+    document.removeEventListener('click', onPopupOutClick);
     document.addEventListener('keydown', onModalEscPress);
   };
 

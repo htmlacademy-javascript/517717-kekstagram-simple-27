@@ -1,12 +1,10 @@
+import { showGetDataError } from './util.js';
+
 const getData = (onSuccess) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then((response) => response.json())
-    .then((pictures) => {
-      onSuccess(pictures);
-    })
-    .catch(() => {
-      throw new Error('Не удалось загрузить данные');
-    });
+    .then(onSuccess)
+    .catch(showGetDataError);
 };
 
 const sendData = (onSuccess, onFail, body) => {
@@ -21,12 +19,10 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail();
+        throw new Error('Не удалось отправить данные');
       }
     })
-    .catch(() => {
-      onFail();
-    });
+    .catch(onFail);
 };
 
 export {getData, sendData};

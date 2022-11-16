@@ -36,7 +36,7 @@ const applyEffect = (evt) => {
 
     resetEffect();
     img.classList.add(`effects__preview--${effect}`);
-    if (effect === 'none') {
+    if (effect === params.none[4]) {
       sliderBlock.classList.add('hidden');
     } else {
       sliderBlock.classList.remove('hidden');
