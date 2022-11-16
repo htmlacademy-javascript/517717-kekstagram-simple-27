@@ -30,4 +30,25 @@ const checkStringLength = (string, length) => string.length <= length;
 
 const isEscapeKey = (key) => key === 'Escape';
 
-export {getRandomPositiveNumber, checkStringLength, isEscapeKey};
+const showGetDataError = () => {
+  const message = document.createElement('p');
+  message.textContent = 'Ошибка загрузки данных. Перезагрузите страницу.';
+  message.style.cssText = `position: fixed;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #3c3614;
+  color: #ffe753;
+  border-bottom: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;`;
+
+  document.body.append(message);
+};
+
+export {getRandomPositiveNumber, checkStringLength, isEscapeKey, showGetDataError};
+
+

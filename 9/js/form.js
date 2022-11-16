@@ -38,7 +38,6 @@ const closeModal = () => {
 
   document.removeEventListener('keydown', onModalEscPress);
   close.removeEventListener('click', closeModal);
-  document.removeEventListener('click', onModalOutClick);
 };
 
 const openModal = () => {
@@ -47,16 +46,9 @@ const openModal = () => {
 
   document.addEventListener('keydown', onModalEscPress);
   close.addEventListener('click', closeModal);
-  document.addEventListener('click', onModalOutClick);
 };
 
 upload.addEventListener('change', openModal);
-
-function onModalOutClick(evt) {
-  if (evt.target === overlay) {
-    closeModal();
-  }
-}
 
 function onModalEscPress(evt) {
   if (isEscapeKey(evt.key)) {
@@ -94,4 +86,4 @@ const increaseScale = () => {
 decreaseButton.addEventListener('click', decreaseScale);
 increaseButton.addEventListener('click', increaseScale);
 
-export { resetData, closeModal, resetEffect, form, img, sliderBlock };
+export { resetData, closeModal, resetEffect, onModalEscPress, form, img, sliderBlock };

@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { form, closeModal } from './form.js';
+import { form, closeModal, onModalEscPress } from './form.js';
 import { sendData } from './api.js';
 
 const validate = () => {
@@ -16,15 +16,18 @@ const validate = () => {
 
     errorButton.removeEventListener('click', hideError);
     document.removeEventListener('keydown', onPopupEscPress);
-    document.addEventListener('click', onPopupOutClick);
+    document.removeEventListener('click', onPopupOutClick);
+    document.addEventListener('keydown', onModalEscPress);
   };
 
   const showError = () => {
     document.body.append(error);
+    error.classList.add('active');
 
     errorButton.addEventListener('click', hideError);
     document.addEventListener('keydown', onPopupEscPress);
     document.addEventListener('click', onPopupOutClick);
+    document.removeEventListener('keydown', onModalEscPress);
   };
 
   const hideSuccess = () => {
@@ -38,6 +41,7 @@ const validate = () => {
 
   const showSuccess = () => {
     document.body.append(success);
+    success.classList.add('active');
 
     successButton.addEventListener('click', hideSuccess);
     document.addEventListener('keydown', onPopupEscPress);
@@ -47,10 +51,11 @@ const validate = () => {
   function onPopupEscPress(evt) {
     if (isEscapeKey(evt.key)) {
       evt.preventDefault();
-      if (typeof error === 'object' && error !== null) {
+      if (error.classList.contains('active')) {
         hideError();
       }
-      if (typeof success === 'object' && success !== null) {
+
+      if (success.classList.contains('active')) {
         hideSuccess();
       }
     }
