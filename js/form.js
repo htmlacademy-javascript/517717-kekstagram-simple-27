@@ -3,7 +3,7 @@ import { isEscapeKey } from './util.js';
 const overlay = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
 const sliderBlock = form.querySelector('.effect-level');
-const upload = form.querySelector('#upload-file');
+const loading = form.querySelector('#upload-file');
 const close = form.querySelector('#upload-cancel');
 const img = form.querySelector('.img-upload__preview img');
 const decreaseButton = form.querySelector('.scale__control--smaller');
@@ -31,6 +31,10 @@ const resetData = () => {
   sliderBlock.classList.add('hidden');
 };
 
+const uploadImage = () => {
+  img.src = URL.createObjectURL(loading.files[0]);
+};
+
 const closeModal = () => {
   resetData();
   document.body.classList.remove('modal-open');
@@ -38,25 +42,18 @@ const closeModal = () => {
 
   document.removeEventListener('keydown', onModalEscPress);
   close.removeEventListener('click', closeModal);
-  document.removeEventListener('click', onModalOutClick);
 };
 
 const openModal = () => {
   document.body.classList.add('modal-open');
   overlay.classList.remove('hidden');
 
+  uploadImage();
   document.addEventListener('keydown', onModalEscPress);
   close.addEventListener('click', closeModal);
-  document.addEventListener('click', onModalOutClick);
 };
 
-upload.addEventListener('click', openModal);
-
-function onModalOutClick(evt) {
-  if (evt.target === overlay) {
-    closeModal();
-  }
-}
+loading.addEventListener('change', openModal);
 
 function onModalEscPress(evt) {
   if (isEscapeKey(evt.key)) {
@@ -73,6 +70,8 @@ const decreaseScale = () => {
     );
     scaleControl.value = `${currentValue}%`;
     img.style.transform = `scale(${currentValue / 100})`;
+  } else {
+    throw new Error('Значение не является числом');
   }
 };
 
@@ -84,10 +83,12 @@ const increaseScale = () => {
     );
     scaleControl.value = `${currentValue}%`;
     img.style.transform = `scale(${currentValue / 100})`;
+  } else {
+    throw new Error('Значение не является числом');
   }
 };
 
 decreaseButton.addEventListener('click', decreaseScale);
 increaseButton.addEventListener('click', increaseScale);
 
-export { resetData, resetEffect, form, img, sliderBlock };
+export { resetData, closeModal, resetEffect, onModalEscPress, form, img, sliderBlock };

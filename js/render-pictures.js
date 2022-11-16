@@ -1,8 +1,7 @@
-import {createData} from './create-data.js';
+//import {createData} from './create-data.js';
+//const picturesData = createData();
 
-const picturesData = createData();
-
-const renderPictures = () => {
+const renderPictures = (picturesData) => {
   const template = document.querySelector('#picture').content.querySelector('.picture');
   const fragment = document.createDocumentFragment();
 
