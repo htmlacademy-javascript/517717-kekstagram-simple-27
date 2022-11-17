@@ -62,7 +62,7 @@ function onModalEscPress(evt) {
   }
 }
 
-const decreaseScale = () => {
+const onDecreaseButtonClick = () => {
   if (!isNaN(currentValue)) {
     currentValue = Math.max(
       currentValue - ScaleParams.STEP,
@@ -75,7 +75,7 @@ const decreaseScale = () => {
   }
 };
 
-const increaseScale = () => {
+const onIncreaseButtonClick = () => {
   if (!isNaN(currentValue)) {
     currentValue = Math.min(
       currentValue + ScaleParams.STEP,
@@ -88,7 +88,7 @@ const increaseScale = () => {
   }
 };
 
-decreaseButton.addEventListener('click', decreaseScale);
-increaseButton.addEventListener('click', increaseScale);
+decreaseButton.addEventListener('click', onDecreaseButtonClick);
+increaseButton.addEventListener('click', onIncreaseButtonClick);
 
 export { resetData, closeModal, resetEffect, onModalEscPress, form, img, sliderBlock };
